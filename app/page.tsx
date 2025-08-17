@@ -692,7 +692,7 @@ function StartMenu({ onClose, onOpenWindow }: {
     },
     { icon: '❓', label: 'Help', action: () => onOpenWindow('help') },
     { icon: '🏃', label: 'Run...', action: () => openRunDialog() },
-    { type: 'separator' },
+    { type: 'separator' as const },
     { icon: '🔒', label: 'Shut Down...', action: () => openShutdownDialog() }
   ];
 
@@ -766,7 +766,7 @@ function StartMenu({ onClose, onOpenWindow }: {
                         onClose();
                       }
                     }}
-                    onMouseEnter={() => setHoveredItem(item.label)}
+                    onMouseEnter={() => setHoveredItem(item.label || '')}
                     onMouseLeave={() => setHoveredItem(null)}
                   >
                     <span>{item.icon}</span>
@@ -825,26 +825,26 @@ function MenuBar({ onOpenWindow, onClearChat }: {
       { label: 'New Chat', action: onClearChat },
       { label: 'Open...', action: () => {} },
       { label: 'Save Chat...', action: () => {} },
-      { type: 'separator' },
+      { type: 'separator' as const },
       { label: 'Print...', action: () => {} },
-      { type: 'separator' },
+      { type: 'separator' as const },
       { label: 'Exit', action: () => {} }
     ],
     Edit: [
       { label: 'Undo', action: () => {} },
       { label: 'Redo', action: () => {} },
-      { type: 'separator' },
+      { type: 'separator' as const },
       { label: 'Cut', action: () => {} },
       { label: 'Copy', action: () => {} },
       { label: 'Paste', action: () => {} },
-      { type: 'separator' },
+      { type: 'separator' as const },
       { label: 'Select All', action: () => {} },
       { label: 'Find...', action: () => {} }
     ],
     View: [
       { label: 'Toolbar', action: () => {} },
       { label: 'Status Bar', action: () => {} },
-      { type: 'separator' },
+      { type: 'separator' as const },
       { label: 'Refresh', action: () => {} },
       { label: 'Full Screen', action: () => {} }
     ],
