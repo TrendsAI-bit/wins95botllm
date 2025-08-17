@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Windows 95 Font Imports */
+@font-face {
+  font-family: 'MS Sans Serif';
+  src: url('data:font/truetype;charset=utf-8;base64,') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Fallback to system fonts that look similar to MS Sans Serif */
+body {
+  font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11px;
+  background: #008080;
+}
+
+/* Windows 95 UI Components */
+.win95-window {
+  @apply bg-win95-gray border-2 border-win95-dark-gray;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+}
+
+.win95-button {
+  @apply bg-win95-gray border border-win95-dark-gray px-4 py-1 text-black cursor-pointer;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+}
+
+.win95-button:active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+}
+
+.win95-input {
+  @apply bg-white border border-win95-dark-gray px-2 py-1;
+  box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px #0a0a0a, inset -2px -2px #ffffff, inset 2px 2px #808080;
+}
+
+.win95-titlebar {
+  @apply bg-win95-dark-blue text-white px-2 py-1 font-bold text-xs;
+  background: linear-gradient(90deg, #0000ff 0%, #000080 100%);
+}
+
+.win95-menubar {
+  @apply bg-win95-gray border-b border-win95-dark-gray px-1 py-1;
+}
+
+.win95-status-bar {
+  @apply bg-win95-gray border-t border-win95-dark-gray px-2 py-1 text-xs;
+}
+
+.win95-panel {
+  @apply bg-win95-gray p-2;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+}
+
+/* Chat specific styles */
+.chat-message {
+  @apply p-2 mb-2 text-xs;
+}
+
+.user-message {
+  @apply bg-win95-light-gray;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+}
+
+.bot-message {
+  @apply bg-white;
+  box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px #0a0a0a, inset -2px -2px #ffffff, inset 2px 2px #808080;
+}
+
+/* Scrollbar styling for Windows 95 look */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 1px solid #808080;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+/* Retro animation for typing indicator */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.typing-indicator {
+  animation: blink 1s infinite;
+}
