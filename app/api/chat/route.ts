@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     ];
 
     const stream = await openai.chat.completions.create({
-      model: "windows95llm",
+      model: "gpt-4o-mini",
       temperature: 0.7,
       max_tokens: 500,
       messages,
