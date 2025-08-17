@@ -311,7 +311,7 @@ export default function HomePage() {
               <div className="text-xs font-bold mb-2">SYSTEM INFO</div>
               <div className="text-xs space-y-1">
                 <div>Status: ONLINE</div>
-                <div>Model: GPT-4</div>
+                <div>Model: windows95llm</div>
                 <div>Mode: RETRO</div>
                 <div>Time: {currentTime}</div>
               </div>
