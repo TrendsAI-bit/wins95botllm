@@ -15,6 +15,15 @@ interface OpenWindow {
   zIndex: number;
 }
 
+interface MenuItem {
+  icon?: string;
+  label?: string;
+  action?: () => void;
+  hasSubmenu?: boolean;
+  submenu?: MenuItem[];
+  type?: 'separator';
+}
+
 export default function HomePage() {
   const [history, setHistory] = useState<Msg[]>([
     { 
@@ -654,7 +663,7 @@ function StartMenu({ onClose, onOpenWindow }: {
 }) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { 
       icon: '📁', 
       label: 'Programs', 
@@ -820,31 +829,31 @@ function MenuBar({ onOpenWindow, onClearChat }: {
 }) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  const menuItems = {
+  const menuItems: Record<string, MenuItem[]> = {
     File: [
       { label: 'New Chat', action: onClearChat },
       { label: 'Open...', action: () => {} },
       { label: 'Save Chat...', action: () => {} },
-      { type: 'separator' as const },
+      { type: 'separator' },
       { label: 'Print...', action: () => {} },
-      { type: 'separator' as const },
+      { type: 'separator' },
       { label: 'Exit', action: () => {} }
     ],
     Edit: [
       { label: 'Undo', action: () => {} },
       { label: 'Redo', action: () => {} },
-      { type: 'separator' as const },
+      { type: 'separator' },
       { label: 'Cut', action: () => {} },
       { label: 'Copy', action: () => {} },
       { label: 'Paste', action: () => {} },
-      { type: 'separator' as const },
+      { type: 'separator' },
       { label: 'Select All', action: () => {} },
       { label: 'Find...', action: () => {} }
     ],
     View: [
       { label: 'Toolbar', action: () => {} },
       { label: 'Status Bar', action: () => {} },
-      { type: 'separator' as const },
+      { type: 'separator' },
       { label: 'Refresh', action: () => {} },
       { label: 'Full Screen', action: () => {} }
     ],
