@@ -222,12 +222,7 @@ export default function HomePage() {
         </div>
 
         {/* Menu Bar */}
-        <div className="win95-menubar">
-          <span className="px-2 py-1 hover:bg-win95-blue hover:text-white cursor-pointer text-xs">File</span>
-          <span className="px-2 py-1 hover:bg-win95-blue hover:text-white cursor-pointer text-xs">Edit</span>
-          <span className="px-2 py-1 hover:bg-win95-blue hover:text-white cursor-pointer text-xs">View</span>
-          <span className="px-2 py-1 hover:bg-win95-blue hover:text-white cursor-pointer text-xs">Help</span>
-        </div>
+        <MenuBar onOpenWindow={openWindow} onClearChat={clearChat} />
 
         {/* Main Content Area */}
         <div className="flex-1 flex">
@@ -640,7 +635,7 @@ function WindowContent({ type }: { type: WindowType }) {
             </div>
             <div>
               <p className="font-bold">ChatBot:</p>
-              <p>Model: GPT-4</p>
+              <p>Model: windows95llm</p>
               <p>Mode: Retro Computing</p>
             </div>
           </div>
@@ -657,16 +652,78 @@ function StartMenu({ onClose, onOpenWindow }: {
   onClose: () => void;
   onOpenWindow: (type: WindowType) => void;
 }) {
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+
   const menuItems = [
-    { icon: '📁', label: 'Programs', hasSubmenu: true },
+    { 
+      icon: '📁', 
+      label: 'Programs', 
+      hasSubmenu: true,
+      submenu: [
+        { icon: '💻', label: 'Accessories', hasSubmenu: true },
+        { icon: '🎮', label: 'Games', hasSubmenu: true },
+        { icon: '🖥️', label: 'MS-DOS Prompt', action: () => openDosPrompt() },
+        { icon: '📝', label: 'Notepad', action: () => openNotepad() },
+        { icon: '🎨', label: 'Paint', action: () => openPaint() },
+        { icon: '🧮', label: 'Calculator', action: () => openCalculator() }
+      ]
+    },
     { icon: '🗂️', label: 'Documents', action: () => onOpenWindow('mydocuments') },
-    { icon: '⚙️', label: 'Settings', hasSubmenu: true },
-    { icon: '🔍', label: 'Find', hasSubmenu: true },
+    { 
+      icon: '⚙️', 
+      label: 'Settings', 
+      hasSubmenu: true,
+      submenu: [
+        { icon: '🖥️', label: 'Control Panel', action: () => onOpenWindow('settings') },
+        { icon: '🖨️', label: 'Printers', action: () => {} },
+        { icon: '📋', label: 'Taskbar...', action: () => {} },
+        { icon: '📁', label: 'Folder Options...', action: () => {} }
+      ]
+    },
+    { 
+      icon: '🔍', 
+      label: 'Find', 
+      hasSubmenu: true,
+      submenu: [
+        { icon: '📄', label: 'Files or Folders...', action: () => {} },
+        { icon: '🖥️', label: 'Computer...', action: () => {} },
+        { icon: '🌐', label: 'On the Internet...', action: () => {} }
+      ]
+    },
     { icon: '❓', label: 'Help', action: () => onOpenWindow('help') },
-    { icon: '🏃', label: 'Run...', action: () => {} },
+    { icon: '🏃', label: 'Run...', action: () => openRunDialog() },
     { type: 'separator' },
-    { icon: '🔒', label: 'Shut Down...', action: () => {} }
+    { icon: '🔒', label: 'Shut Down...', action: () => openShutdownDialog() }
   ];
+
+  function openDosPrompt() {
+    onOpenWindow('mydocuments'); // Placeholder
+    onClose();
+  }
+
+  function openNotepad() {
+    onOpenWindow('mydocuments'); // Placeholder
+    onClose();
+  }
+
+  function openPaint() {
+    onOpenWindow('mydocuments'); // Placeholder
+    onClose();
+  }
+
+  function openCalculator() {
+    onOpenWindow('settings'); // Placeholder
+    onClose();
+  }
+
+  function openRunDialog() {
+    onOpenWindow('help'); // Placeholder
+    onClose();
+  }
+
+  function openShutdownDialog() {
+    onClose();
+  }
 
   return (
     <>
@@ -693,28 +750,166 @@ function StartMenu({ onClose, onOpenWindow }: {
         {/* Menu Items */}
         <div className="py-1">
           {menuItems.map((item, index) => (
-            <div key={index}>
+            <div key={index} className="relative">
               {item.type === 'separator' ? (
                 <div className="h-px bg-win95-dark-gray mx-2 my-1" />
               ) : (
-                <button
-                  className="w-full text-left px-3 py-1 text-xs hover:bg-win95-blue hover:text-white flex items-center gap-2"
-                  onClick={() => {
-                    if (item.action) {
-                      item.action();
-                      onClose();
-                    }
-                  }}
-                >
-                  <span>{item.icon}</span>
-                  <span className="flex-1">{item.label}</span>
-                  {item.hasSubmenu && <span>▶</span>}
-                </button>
+                <>
+                  <button
+                    className={clsx(
+                      "w-full text-left px-3 py-1 text-xs flex items-center gap-2",
+                      hoveredItem === item.label ? "bg-win95-blue text-white" : "hover:bg-win95-blue hover:text-white"
+                    )}
+                    onClick={() => {
+                      if (item.action) {
+                        item.action();
+                        onClose();
+                      }
+                    }}
+                    onMouseEnter={() => setHoveredItem(item.label)}
+                    onMouseLeave={() => setHoveredItem(null)}
+                  >
+                    <span>{item.icon}</span>
+                    <span className="flex-1">{item.label}</span>
+                    {item.hasSubmenu && <span>▶</span>}
+                  </button>
+
+                  {/* Submenu */}
+                  {item.hasSubmenu && hoveredItem === item.label && item.submenu && (
+                    <div 
+                      className="absolute left-full top-0 bg-win95-gray border-2 border-win95-dark-gray z-60"
+                      style={{
+                        width: '180px',
+                        boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff'
+                      }}
+                    >
+                      <div className="py-1">
+                        {item.submenu.map((subItem, subIndex) => (
+                          <button
+                            key={subIndex}
+                            className="w-full text-left px-3 py-1 text-xs hover:bg-win95-blue hover:text-white flex items-center gap-2"
+                            onClick={() => {
+                              if (subItem.action) {
+                                subItem.action();
+                                onClose();
+                              }
+                            }}
+                          >
+                            <span>{subItem.icon}</span>
+                            <span className="flex-1">{subItem.label}</span>
+                            {subItem.hasSubmenu && <span>▶</span>}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           ))}
         </div>
       </div>
     </>
+  );
+}
+
+// Menu Bar Component
+function MenuBar({ onOpenWindow, onClearChat }: {
+  onOpenWindow: (type: WindowType) => void;
+  onClearChat: () => void;
+}) {
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+
+  const menuItems = {
+    File: [
+      { label: 'New Chat', action: onClearChat },
+      { label: 'Open...', action: () => {} },
+      { label: 'Save Chat...', action: () => {} },
+      { type: 'separator' },
+      { label: 'Print...', action: () => {} },
+      { type: 'separator' },
+      { label: 'Exit', action: () => {} }
+    ],
+    Edit: [
+      { label: 'Undo', action: () => {} },
+      { label: 'Redo', action: () => {} },
+      { type: 'separator' },
+      { label: 'Cut', action: () => {} },
+      { label: 'Copy', action: () => {} },
+      { label: 'Paste', action: () => {} },
+      { type: 'separator' },
+      { label: 'Select All', action: () => {} },
+      { label: 'Find...', action: () => {} }
+    ],
+    View: [
+      { label: 'Toolbar', action: () => {} },
+      { label: 'Status Bar', action: () => {} },
+      { type: 'separator' },
+      { label: 'Refresh', action: () => {} },
+      { label: 'Full Screen', action: () => {} }
+    ],
+    Help: [
+      { label: 'Help Topics', action: () => onOpenWindow('help') },
+      { label: 'About Windows 95 ChatBot', action: () => onOpenWindow('about') }
+    ]
+  };
+
+  return (
+    <div className="win95-menubar relative">
+      {Object.entries(menuItems).map(([menuName, items]) => (
+        <div key={menuName} className="relative inline-block">
+          <span
+            className={clsx(
+              "px-2 py-1 cursor-pointer text-xs",
+              activeMenu === menuName ? "bg-win95-blue text-white" : "hover:bg-win95-blue hover:text-white"
+            )}
+            onClick={() => setActiveMenu(activeMenu === menuName ? null : menuName)}
+          >
+            {menuName}
+          </span>
+
+          {/* Dropdown Menu */}
+          {activeMenu === menuName && (
+            <>
+              {/* Overlay to catch clicks outside */}
+              <div 
+                className="fixed inset-0 z-30"
+                onClick={() => setActiveMenu(null)}
+              />
+              
+              <div 
+                className="absolute top-full left-0 bg-win95-gray border-2 border-win95-dark-gray z-40"
+                style={{
+                  minWidth: '150px',
+                  boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff'
+                }}
+              >
+                <div className="py-1">
+                  {items.map((item, index) => (
+                    <div key={index}>
+                      {item.type === 'separator' ? (
+                        <div className="h-px bg-win95-dark-gray mx-2 my-1" />
+                      ) : (
+                        <button
+                          className="w-full text-left px-3 py-1 text-xs hover:bg-win95-blue hover:text-white"
+                          onClick={() => {
+                            if (item.action) {
+                              item.action();
+                              setActiveMenu(null);
+                            }
+                          }}
+                        >
+                          {item.label}
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
