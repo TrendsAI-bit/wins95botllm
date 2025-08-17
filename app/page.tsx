@@ -28,7 +28,7 @@ export default function HomePage() {
   const [history, setHistory] = useState<Msg[]>([
     { 
       role: "assistant", 
-      content: "SYSTEM INITIALIZED...\nWINDOWS 95 CHATBOT v1.0 READY\n\nGREETINGS, USER. I AM YOUR DIGITAL ASSISTANT.\nHOW MAY I PROCESS YOUR REQUEST TODAY?",
+      content: "SYSTEM INITIALIZED...\nWINDOWS XP CHATBOT v2.0 READY\n\nWELCOME TO THE FUTURE OF COMPUTING.\nHOW MAY I ASSIST YOU TODAY?",
       timestamp: new Date().toLocaleTimeString()
     }
   ]);
@@ -178,11 +178,14 @@ export default function HomePage() {
   }
 
   return (
-    <div className="h-screen bg-win95-cyan p-2 flex flex-col">
-      {/* Desktop Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="w-full h-full" style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px)`
+    <div className="h-screen bg-xp-desktop p-4 flex flex-col">
+      {/* Desktop Background - Bliss Hills */}
+      <div className="absolute inset-0" style={{
+        backgroundImage: `linear-gradient(to bottom, #5a7fdb 0%, #4a69bd 50%, #3c5aa6 100%)`,
+        backgroundAttachment: 'fixed'
+      }}>
+        <div className="w-full h-full opacity-20" style={{
+          backgroundImage: `radial-gradient(circle at 30% 70%, rgba(255,255,255,0.3) 0%, transparent 50%)`
         }}></div>
       </div>
 
@@ -216,17 +219,17 @@ export default function HomePage() {
       </div>
 
       {/* Main Window */}
-      <div className="win95-window flex-1 flex flex-col relative z-10 max-w-4xl mx-auto w-full">
+      <div className="xp-window flex-1 flex flex-col relative z-10 max-w-5xl mx-auto w-full">
         {/* Title Bar */}
-        <div className="win95-titlebar flex items-center justify-between">
+        <div className="xp-titlebar flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="Bot" className="w-4 h-4" />
-            <span>Windows 95 ChatBot - [Chat Session]</span>
+            <img src="/logo.png" alt="Bot" className="w-5 h-5" />
+            <span>Windows XP ChatBot - [Chat Session]</span>
           </div>
           <div className="flex gap-1">
-            <button className="bg-win95-gray text-black px-2 text-xs border border-win95-dark-gray">_</button>
-            <button className="bg-win95-gray text-black px-2 text-xs border border-win95-dark-gray">□</button>
-            <button className="bg-win95-gray text-black px-1 text-xs border border-win95-dark-gray">×</button>
+            <button className="bg-xp-gray hover:bg-xp-light-gray text-black px-3 py-1 text-xs rounded border border-xp-dark-gray">_</button>
+            <button className="bg-xp-gray hover:bg-xp-light-gray text-black px-3 py-1 text-xs rounded border border-xp-dark-gray">□</button>
+            <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 text-xs rounded border border-red-700">×</button>
           </div>
         </div>
 
@@ -240,9 +243,9 @@ export default function HomePage() {
             {/* Chat Messages */}
             <div 
               ref={chatRef}
-              className="flex-1 p-2 overflow-y-auto bg-white border-2"
+              className="flex-1 p-3 overflow-y-auto bg-white rounded border border-xp-dark-gray"
               style={{
-                boxShadow: 'inset -1px -1px #dfdfdf, inset 1px 1px #0a0a0a, inset -2px -2px #ffffff, inset 2px 2px #808080'
+                boxShadow: 'inset 1px 1px 2px rgba(0, 0, 0, 0.1)'
               }}
             >
               {history.map((m, i) => (
@@ -273,10 +276,10 @@ export default function HomePage() {
             </div>
 
             {/* Input Area */}
-            <div className="p-2 bg-win95-gray border-t border-win95-dark-gray">
+            <div className="p-3 bg-xp-gray border-t border-xp-dark-gray rounded-b">
               <div className="flex gap-2">
                 <input
-                  className="win95-input flex-1 text-xs font-mono"
+                  className="xp-input flex-1 text-sm"
                   placeholder="Type your message here..."
                   value={input}
                   onChange={e => setInput(e.target.value)}
@@ -291,13 +294,13 @@ export default function HomePage() {
                 <button 
                   onClick={send} 
                   disabled={loading || !input.trim()}
-                  className="win95-button text-xs min-w-[60px] disabled:opacity-50"
+                  className="xp-button text-sm min-w-[70px] disabled:opacity-50"
                 >
                   {loading ? "..." : "SEND"}
                 </button>
                 <button 
                   onClick={clearChat}
-                  className="win95-button text-xs min-w-[60px]"
+                  className="xp-button text-sm min-w-[70px]"
                 >
                   CLEAR
                 </button>
@@ -306,34 +309,34 @@ export default function HomePage() {
           </div>
 
           {/* Side Panel */}
-          <div className="w-48 bg-win95-gray border-l border-win95-dark-gray p-2">
-            <div className="win95-panel">
-              <div className="text-xs font-bold mb-2">SYSTEM INFO</div>
-              <div className="text-xs space-y-1">
+          <div className="w-52 bg-xp-gray border-l border-xp-dark-gray p-3 rounded-r">
+            <div className="xp-panel">
+              <div className="text-sm font-bold mb-3">SYSTEM INFO</div>
+              <div className="text-sm space-y-2">
                 <div>Status: ONLINE</div>
-                <div>Model: windows95llm</div>
-                <div>Mode: RETRO</div>
+                <div>Model: WindowsXP AI</div>
+                <div>Mode: MODERN</div>
                 <div>Time: {currentTime}</div>
               </div>
             </div>
 
-            <div className="win95-panel mt-2">
-              <div className="text-xs font-bold mb-2">QUICK ACTIONS</div>
-              <div className="space-y-1">
+            <div className="xp-panel mt-3">
+              <div className="text-sm font-bold mb-3">QUICK ACTIONS</div>
+              <div className="space-y-2">
                 <button 
-                  className="win95-button w-full text-xs py-1"
+                  className="xp-button w-full text-sm py-2"
                   onClick={() => openWindow('help')}
                 >
                   HELP
                 </button>
                 <button 
-                  className="win95-button w-full text-xs py-1"
+                  className="xp-button w-full text-sm py-2"
                   onClick={() => openWindow('about')}
                 >
                   ABOUT
                 </button>
                 <button 
-                  className="win95-button w-full text-xs py-1"
+                  className="xp-button w-full text-sm py-2"
                   onClick={() => openWindow('settings')}
                 >
                   SETTINGS
@@ -341,13 +344,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="win95-panel mt-2">
-              <div className="text-xs font-bold mb-2">LOGO</div>
+            <div className="xp-panel mt-3">
+              <div className="text-sm font-bold mb-3">LOGO</div>
               <div className="flex justify-center">
                 <img 
                   src="/logo.png" 
                   alt="ChatBot Logo" 
-                  className="w-16 h-16 object-contain"
+                  className="w-20 h-20 object-contain rounded"
                 />
               </div>
             </div>
@@ -355,7 +358,7 @@ export default function HomePage() {
         </div>
 
         {/* Status Bar */}
-        <div className="win95-status-bar flex justify-between">
+        <div className="xp-status-bar flex justify-between">
           <span>Ready</span>
           <div className="flex gap-4">
             <span>Messages: {history.length}</span>
@@ -385,25 +388,25 @@ export default function HomePage() {
       )}
 
       {/* Taskbar */}
-      <div className="mt-2 bg-win95-gray border-t-2 border-win95-light-gray p-1 flex items-center gap-2">
+      <div className="mt-3 xp-taskbar p-2 flex items-center gap-3 rounded-t-lg">
         <button 
           className={clsx(
-            "win95-button px-3 py-1 text-xs font-bold flex items-center gap-1",
-            showStartMenu ? "shadow-win95-pressed" : ""
+            "xp-start-button text-sm font-bold flex items-center gap-2",
+            showStartMenu ? "shadow-xp-pressed" : ""
           )}
           onClick={() => setShowStartMenu(!showStartMenu)}
         >
-          <span className="text-sm">🪟</span>
-          Start
+          <span className="text-lg">🪟</span>
+          start
         </button>
         
-        {/* Open Windows in Taskbar */}
-        <div className="flex gap-1 flex-1">
+                {/* Open Windows in Taskbar */}
+        <div className="flex gap-2 flex-1">
           {openWindows.map((window) => (
             <button
               key={window.id}
               className={clsx(
-                "win95-button px-2 py-1 text-xs max-w-32 truncate",
+                "xp-button px-3 py-1 text-sm max-w-36 truncate",
                 window.isMinimized ? "opacity-75" : ""
               )}
               onClick={() => window.isMinimized ? restoreWindow(window.id) : minimizeWindow(window.id)}
@@ -412,8 +415,8 @@ export default function HomePage() {
             </button>
           ))}
         </div>
-        
-        <div className="bg-win95-gray border border-win95-dark-gray px-2 py-1 text-xs">
+
+        <div className="bg-xp-light-gray border border-xp-dark-gray px-3 py-2 text-sm rounded shadow-xp-panel">
           {currentTime}
         </div>
       </div>

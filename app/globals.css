@@ -2,57 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Windows 95 Font Imports */
-@font-face {
-  font-family: 'MS Sans Serif';
-  src: url('data:font/truetype;charset=utf-8;base64,') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Windows XP Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
 
-/* Fallback to system fonts that look similar to MS Sans Serif */
+/* Windows XP system font stack */
 body {
-  font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 11px;
-  background: #008080;
+  font-family: 'Tahoma', 'Segoe UI', 'Microsoft Sans Serif', sans-serif;
+  font-size: 12px;
+  background: linear-gradient(to bottom, #5a7fdb 0%, #4a69bd 100%);
+  background-attachment: fixed;
 }
 
-/* Windows 95 UI Components */
-.win95-window {
-  @apply bg-win95-gray border-2 border-win95-dark-gray;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+/* Windows XP UI Components */
+.xp-window {
+  @apply bg-xp-gray rounded-lg border border-xp-border;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.win95-button {
-  @apply bg-win95-gray border border-win95-dark-gray px-4 py-1 text-black cursor-pointer;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+.xp-button {
+  @apply bg-gradient-to-b from-xp-light-gray to-xp-gray border border-xp-dark-gray px-4 py-2 text-black cursor-pointer rounded;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.1s ease;
 }
 
-.win95-button:active {
-  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+.xp-button:hover {
+  @apply bg-gradient-to-b from-white to-xp-light-gray;
 }
 
-.win95-input {
-  @apply bg-white border border-win95-dark-gray px-2 py-1;
-  box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px #0a0a0a, inset -2px -2px #ffffff, inset 2px 2px #808080;
+.xp-button:active {
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+  transform: translateY(1px);
 }
 
-.win95-titlebar {
-  @apply bg-win95-dark-blue text-white px-2 py-1 font-bold text-xs;
-  background: linear-gradient(90deg, #0000ff 0%, #000080 100%);
+.xp-input {
+  @apply bg-white border-2 border-xp-dark-gray px-3 py-2 rounded;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.win95-menubar {
-  @apply bg-win95-gray border-b border-win95-dark-gray px-1 py-1;
+.xp-titlebar {
+  @apply text-white px-3 py-2 font-bold text-sm rounded-t-lg;
+  background: linear-gradient(90deg, #0054e3 0%, #003d9c 50%, #0054e3 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.win95-status-bar {
-  @apply bg-win95-gray border-t border-win95-dark-gray px-2 py-1 text-xs;
+.xp-menubar {
+  @apply bg-xp-light-gray border-b border-xp-dark-gray px-2 py-1;
 }
 
-.win95-panel {
-  @apply bg-win95-gray p-2;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+.xp-status-bar {
+  @apply bg-xp-gray border-t border-xp-dark-gray px-3 py-1 text-xs rounded-b-lg;
+}
+
+.xp-panel {
+  @apply bg-xp-gray p-3 rounded;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.8), inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.xp-start-button {
+  @apply bg-gradient-to-r from-xp-start-green to-xp-green text-white px-4 py-2 rounded-r-full font-bold;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), inset 1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.xp-taskbar {
+  @apply bg-gradient-to-b from-xp-taskbar to-xp-dark-blue;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Chat specific styles */
@@ -61,32 +74,33 @@ body {
 }
 
 .user-message {
-  @apply bg-win95-light-gray;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+  @apply bg-xp-light-blue bg-opacity-20 rounded-lg;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .bot-message {
-  @apply bg-white;
-  box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px #0a0a0a, inset -2px -2px #ffffff, inset 2px 2px #808080;
+  @apply bg-white rounded-lg;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Scrollbar styling for Windows 95 look */
+/* Scrollbar styling for Windows XP look */
 ::-webkit-scrollbar {
   width: 16px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #c0c0c0;
-  border: 1px solid #808080;
+  background: #f1f0e7;
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c0c0c0;
-  border: 1px outset #c0c0c0;
+  background: linear-gradient(to bottom, #ece9d8, #aca899);
+  border-radius: 8px;
+  border: 1px solid #aca899;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0;
+  background: linear-gradient(to bottom, #d4d0c8, #9c9a91);
 }
 
 /* Retro animation for typing indicator */
