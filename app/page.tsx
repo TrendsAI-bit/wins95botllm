@@ -223,7 +223,7 @@ export default function HomePage() {
         {/* Title Bar */}
         <div className="xp-titlebar flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="Bot" className="w-5 h-5" />
+            <img src="/Logo.png" alt="Bot" className="w-5 h-5" />
             <span>Windows XP ChatBot - [Chat Session]</span>
           </div>
           <div className="flex gap-1">
@@ -348,7 +348,7 @@ export default function HomePage() {
               <div className="text-sm font-bold mb-3">LOGO</div>
               <div className="flex justify-center">
                 <img 
-                  src="/logo.png" 
+                  src="/Logo.png" 
                   alt="ChatBot Logo" 
                   className="w-20 h-20 object-contain rounded"
                 />
@@ -436,7 +436,7 @@ function DesktopIcon({ icon, label, onDoubleClick }: {
     <div
       className={clsx(
         "flex flex-col items-center w-16 p-1 cursor-pointer rounded",
-        selected ? "bg-win95-blue bg-opacity-30" : ""
+        selected ? "bg-xp-blue bg-opacity-30" : ""
       )}
       onClick={() => setSelected(!selected)}
       onDoubleClick={onDoubleClick}
@@ -460,36 +460,36 @@ function PopupWindow({ window, onClose, onMinimize }: {
 }) {
   return (
     <div
-      className="absolute bg-win95-gray border-2 border-win95-dark-gray"
+      className="absolute bg-xp-gray border-2 border-xp-dark-gray rounded-lg shadow-xp-window"
       style={{
         top: `${50 + (window.zIndex - 100) * 20}px`,
         left: `${100 + (window.zIndex - 100) * 20}px`,
         width: '400px',
         height: '300px',
         zIndex: window.zIndex,
-        boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff'
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
       }}
     >
       {/* Title Bar */}
-      <div className="win95-titlebar flex items-center justify-between px-2 py-1">
+      <div className="xp-titlebar flex items-center justify-between px-3 py-2">
         <div className="flex items-center gap-2">
           <span className="text-xs">{getWindowIcon(window.type)}</span>
           <span className="text-xs">{window.title}</span>
         </div>
         <div className="flex gap-1">
           <button 
-            className="bg-win95-gray text-black px-2 text-xs border border-win95-dark-gray hover:bg-win95-light-gray"
+            className="xp-button px-3 py-1 text-xs"
             onClick={onMinimize}
           >
             _
           </button>
           <button 
-            className="bg-win95-gray text-black px-2 text-xs border border-win95-dark-gray hover:bg-win95-light-gray"
+            className="xp-button px-3 py-1 text-xs"
           >
             □
           </button>
           <button 
-            className="bg-win95-gray text-black px-1 text-xs border border-win95-dark-gray hover:bg-win95-light-gray"
+            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 text-xs rounded border border-red-700"
             onClick={onClose}
           >
             ×
@@ -747,16 +747,16 @@ function StartMenu({ onClose, onOpenWindow }: {
       
       {/* Start Menu */}
       <div 
-        className="absolute bottom-12 left-1 bg-win95-gray border-2 border-win95-dark-gray z-50"
+        className="absolute bottom-16 left-2 bg-xp-gray border-2 border-xp-dark-gray z-50 rounded-lg shadow-xp-window"
         style={{
           width: '200px',
-          boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff'
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
         }}
       >
         {/* Start Menu Header */}
-        <div className="bg-gradient-to-r from-win95-dark-blue to-win95-blue text-white p-2 text-xs font-bold flex items-center gap-2">
+        <div className="bg-gradient-to-r from-xp-blue to-xp-light-blue text-white p-3 text-sm font-bold flex items-center gap-2 rounded-t-lg">
           <span className="text-lg">🪟</span>
-          <span>Windows 95</span>
+          <span>Windows XP</span>
         </div>
 
         {/* Menu Items */}
@@ -764,13 +764,13 @@ function StartMenu({ onClose, onOpenWindow }: {
           {menuItems.map((item, index) => (
             <div key={index} className="relative">
               {item.type === 'separator' ? (
-                <div className="h-px bg-win95-dark-gray mx-2 my-1" />
+                <div className="h-px bg-xp-dark-gray mx-2 my-1" />
               ) : (
                 <>
                   <button
                     className={clsx(
                       "w-full text-left px-3 py-1 text-xs flex items-center gap-2",
-                      hoveredItem === item.label ? "bg-win95-blue text-white" : "hover:bg-win95-blue hover:text-white"
+                      hoveredItem === item.label ? "bg-xp-blue text-white" : "hover:bg-xp-blue hover:text-white"
                     )}
                     onClick={() => {
                       if (item.action) {
@@ -789,17 +789,17 @@ function StartMenu({ onClose, onOpenWindow }: {
                   {/* Submenu */}
                   {item.hasSubmenu && hoveredItem === item.label && item.submenu && (
                     <div 
-                      className="absolute left-full top-0 bg-win95-gray border-2 border-win95-dark-gray z-60"
+                      className="absolute left-full top-0 bg-xp-gray border-2 border-win95-dark-gray z-60"
                       style={{
                         width: '180px',
-                        boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff'
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
                       }}
                     >
                       <div className="py-1">
                         {item.submenu.map((subItem, subIndex) => (
                           <button
                             key={subIndex}
-                            className="w-full text-left px-3 py-1 text-xs hover:bg-win95-blue hover:text-white flex items-center gap-2"
+                            className="w-full text-left px-3 py-1 text-xs hover:bg-xp-blue hover:text-white flex items-center gap-2"
                             onClick={() => {
                               if (subItem.action) {
                                 subItem.action();
@@ -867,13 +867,13 @@ function MenuBar({ onOpenWindow, onClearChat }: {
   };
 
   return (
-    <div className="win95-menubar relative">
+    <div className="xp-menubar relative">
       {Object.entries(menuItems).map(([menuName, items]) => (
         <div key={menuName} className="relative inline-block">
           <span
             className={clsx(
               "px-2 py-1 cursor-pointer text-xs",
-              activeMenu === menuName ? "bg-win95-blue text-white" : "hover:bg-win95-blue hover:text-white"
+              activeMenu === menuName ? "bg-xp-blue text-white" : "hover:bg-xp-blue hover:text-white"
             )}
             onClick={() => setActiveMenu(activeMenu === menuName ? null : menuName)}
           >
@@ -890,20 +890,20 @@ function MenuBar({ onOpenWindow, onClearChat }: {
               />
               
               <div 
-                className="absolute top-full left-0 bg-win95-gray border-2 border-win95-dark-gray z-40"
+                className="absolute top-full left-0 bg-xp-gray border-2 border-win95-dark-gray z-40"
                 style={{
                   minWidth: '150px',
-                  boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff'
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
                 }}
               >
                 <div className="py-1">
                   {items.map((item, index) => (
                     <div key={index}>
                       {item.type === 'separator' ? (
-                        <div className="h-px bg-win95-dark-gray mx-2 my-1" />
+                        <div className="h-px bg-xp-dark-gray mx-2 my-1" />
                       ) : (
                         <button
-                          className="w-full text-left px-3 py-1 text-xs hover:bg-win95-blue hover:text-white"
+                          className="w-full text-left px-3 py-1 text-xs hover:bg-xp-blue hover:text-white"
                           onClick={() => {
                             if (item.action) {
                               item.action();

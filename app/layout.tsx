@@ -2,10 +2,12 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Windows 95 Bot LLM',
-  description: 'A retro Windows 95-style chatbot with LLM integration',
+  title: 'Windows XP ChatBot',
+  description: 'A modern retro Windows XP-style chatbot with AI integration',
   icons: {
-    icon: '/logo.png',
+    icon: '/Logo.png',
+    shortcut: '/Logo.png',
+    apple: '/Logo.png',
   },
 }
 
@@ -16,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-ms-sans bg-win95-cyan overflow-hidden">
+      <body className="font-system bg-xp-desktop overflow-hidden">
         {children}
       </body>
     </html>
